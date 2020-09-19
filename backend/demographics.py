@@ -26,7 +26,7 @@ census_codes = {
 def main():
     pp = pprint.PrettyPrinter(indent=2)
     # zip_codes = addressToZipCodes("1036 Heather LN Hartford Wisconsin", "5")
-    zip_codes = zipCodeToZipCodes("53072", "1")
+    zip_codes = zipCodeToZipCodes("53072", "5")
     pp.pprint(aggregateAllData(zip_codes))
 
 
@@ -92,11 +92,17 @@ def aggregateAllData(zip_codes):
         if little_dict is not None:
             total_counter += 1
             for demographic, value in little_dict.items():
-                big_dict[demographic] += 0 if value is None else int(
+                # compute weighted average for these fields
+                if demographic == "median_age" or demographic == "median_income":
+                    big_dict[demographic] += 0 if value is None else int(
+                    float(value) * float(little_dict["total_population"]))
+                # sum the count of all other fields
+                else:
+                    big_dict[demographic] += 0 if value is None else int(
                     float(value))
 
-    big_dict["median_age"] /= total_counter
-    big_dict["median_income"] /= total_counter
+    big_dict["median_age"] /= big_dict["total_population"]
+    big_dict["median_income"] /= big_dict["total_population"]
     big_dict["median_age"] = int(big_dict["median_age"])
     big_dict["median_income"] = int(big_dict["median_income"])
 
