@@ -70,7 +70,7 @@ def addressToCoordinates(input_address):
 def addressToZipCodes(input_address, radius):
     geolocator = Nominatim(user_agent="sucky_triangles")
     location = geolocator.geocode(input_address, exactly_one=True)
-    zip_code_regex = re.compile(r'\d{5,6}')
+    zip_code_regex = re.compile(r"\s\b(\d{5})(?:-\d{4})?,")
     zip_code = zip_code_regex.findall(location.address)[0]
     print(zip_code)
     url = "https://www.zipcodeapi.com/rest/q9diw5gxk8r7YuGVrwfEmoyfcq0B1asM6Em3yzQs81Cv4EjTTrSToFD5ubo0Jg6V/radius.json/" + zip_code + "/" + radius + "/mile?minimal"
