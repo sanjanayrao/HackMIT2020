@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MapSection from '../../../utility/Map'
+import Cards from '../../../utility/Cards'
+import CardsList from '../../../utility/CardsList'
 
 const location = {
     address: 'asdfasdfasdfasdfasdfasdfasdfas dasf asdf asdf asd f.',
@@ -11,9 +13,17 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <h1>Home</h1>
-                <MapSection location={location} zoomLevel={17} />
+                <div>
+                    <h1>Home</h1>
+                    <MapSection location={location} zoomLevel={17} />
+                </div>
+
+                <div className="cards">
+                    <CardsList></CardsList>
+                </div>
             </div>
+
+
         );
     }
 }

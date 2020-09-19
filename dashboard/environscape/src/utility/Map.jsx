@@ -24,6 +24,8 @@ const Map = ({ location, zoomLevel }) => (
     </div>
 )
 
+
+
 const LocationPin = ({ text }) => (
     <div className="pin">
         <Icon icon={LocationOnIcon} className="pin-icon" />
