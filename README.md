@@ -6,6 +6,7 @@
   Our HackMIT2020 project, Environscape, seeks to reveal these secrets to provide insight to policy makers and city planners, and to make it harder for people to ignore the problem. Given a street address and a radius, Environscape will display demographic information paired with information about hazardous pollutants in the area. Our intent is for these tools to be used to create more informed policies as it pertains to climate change, city planning, and pollutant/waste managment in order to create a safe and healthy environment for all. 
 
 
+
 Sources:
 
 [NIH Study](https://ehp.niehs.nih.gov/doi/pdf/10.1289/ehp.02110s2161#:~:text=Environmental%20injustice%20can%20be%20defined,laws%2C%20regulations%2C%20governmental%20programs%2C)
