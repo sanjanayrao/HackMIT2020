@@ -16,7 +16,13 @@ class MyHandler(BaseHTTPRequestHandler):
             self.path
             print(params)
             self.wfile.write(json.dumps(
-                envInfo.get_air_quality(50.857456, 2.354611)).encode('utf-8'))
+                envInfo.get_air_quality(params['lat'][0], params['lon'][0])).encode('utf-8'))
+        if path == "/DemoInfo":
+            self.send_response(200)
+            self.send_header("Content-type", "text/json")
+            self.end_headers()
+            self.path
+            print(params)
 
 
 def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
