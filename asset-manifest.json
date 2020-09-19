@@ -1,23 +1,22 @@
 {
   "files": {
     "main.css": "/HackMIT2020/static/css/main.5f361e03.chunk.css",
-    "main.js": "/HackMIT2020/static/js/main.e24d0b12.chunk.js",
-    "main.js.map": "/HackMIT2020/static/js/main.e24d0b12.chunk.js.map",
+    "main.js": "/HackMIT2020/static/js/main.2f9e4d0f.chunk.js",
+    "main.js.map": "/HackMIT2020/static/js/main.2f9e4d0f.chunk.js.map",
     "runtime-main.js": "/HackMIT2020/static/js/runtime-main.49b86c20.js",
     "runtime-main.js.map": "/HackMIT2020/static/js/runtime-main.49b86c20.js.map",
-    "static/js/2.e5323580.chunk.js": "/HackMIT2020/static/js/2.e5323580.chunk.js",
-    "static/js/2.e5323580.chunk.js.map": "/HackMIT2020/static/js/2.e5323580.chunk.js.map",
+    "static/js/2.ed89d25a.chunk.js": "/HackMIT2020/static/js/2.ed89d25a.chunk.js",
+    "static/js/2.ed89d25a.chunk.js.map": "/HackMIT2020/static/js/2.ed89d25a.chunk.js.map",
     "index.html": "/HackMIT2020/index.html",
-    "precache-manifest.e67b3089f59f696690a06a12f62d14a5.js": "/HackMIT2020/precache-manifest.e67b3089f59f696690a06a12f62d14a5.js",
+    "precache-manifest.46ea38b4b44aa291c7cf886dc1c51d62.js": "/HackMIT2020/precache-manifest.46ea38b4b44aa291c7cf886dc1c51d62.js",
     "service-worker.js": "/HackMIT2020/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/HackMIT2020/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.e5323580.chunk.js.LICENSE.txt": "/HackMIT2020/static/js/2.e5323580.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/HackMIT2020/static/media/logo.5d5d9eef.svg"
+    "static/js/2.ed89d25a.chunk.js.LICENSE.txt": "/HackMIT2020/static/js/2.ed89d25a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.49b86c20.js",
-    "static/js/2.e5323580.chunk.js",
+    "static/js/2.ed89d25a.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.e24d0b12.chunk.js"
+    "static/js/main.2f9e4d0f.chunk.js"
   ]
 }
