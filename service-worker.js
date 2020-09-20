@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/HackMIT2020/precache-manifest.46ea38b4b44aa291c7cf886dc1c51d62.js"
+  "/HackMIT2020/precache-manifest.fade6ff182b97a0875b66feb2d84ef54.js"
 );
 
 self.addEventListener('message', (event) => {
