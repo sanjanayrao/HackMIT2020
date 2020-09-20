@@ -1,0 +1,1 @@
+{"metadata": null, "data": null, "error": {"code": "location_unsupported", "title": "Location Specified Is Unsupported", "detail": "The location specified in the request is unsupported. Make sure you've specified the 'lat' and 'lon' parameters within the coverage permissions set in your account. You can contact support@breezometer.com to get more information"}}

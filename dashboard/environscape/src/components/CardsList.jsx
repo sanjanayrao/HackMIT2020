@@ -3,18 +3,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Cards from './Cards'
 
 const useStyles = makeStyles((theme) => ({
-    card:{
-        backgroundColor: "#9E8FB2"
+    card :{
+        display:'none',
+        padding: 5,
     }
   }));
-
 export default function CardsList(props) {
     const classes = useStyles();
     return (
         <div>
-            <Cards className={classes.card} title="Total Population" body="test body1"></Cards>
-            <Cards title="Average Age" body="test body2"></Cards>
-            <Cards title="Average Income" body="test body3"></Cards>
+            <Cards title="Total Population" col="#5688C7" body={props.pop}></Cards>
+            <Cards title="Median Age" col="#DDA448" body={props.age}></Cards>
+            <Cards title="Median Income " col="#2C5784" body={'$'.concat(props.inc,'/year')}></Cards>
         </div>
     );
 }

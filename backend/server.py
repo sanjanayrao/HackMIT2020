@@ -15,19 +15,21 @@ class MyHandler(BaseHTTPRequestHandler):
         params = urllib.parse.parse_qs(self.path.split('?')[1])
         if path == "/AirQuality":
             self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-type", "text/json")
             self.end_headers()
-            addr = params['addr'][0].replace('_', ' ')
-            loc = demographics.addressToCoordinates(addr)
+            print(params)
             self.wfile.write(json.dumps(
-                envInfo.get_air_quality(loc[0], loc[1])).encode('utf-8'))
+                envInfo.get_air_quality(params['lat'][0], params['lon'][0])).encode('utf-8'))
         elif path == "/DemoInfo":
             self.send_response(200)
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-type", "text/json")
             self.end_headers()
-            zip_codes = demographics.zipCodeToZipCodes(params['zip'][0], "1")
+            zip_codes = demographics.zipCodeToZipCodes(params['zip'][0], params['rad'][0])
             self.wfile.write(json.dumps(
                 demographics.aggregateAllData(zip_codes)).encode('utf-8'))
+        print("Sent Response")
 
 
 def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):

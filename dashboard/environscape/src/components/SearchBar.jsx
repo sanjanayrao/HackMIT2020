@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  {Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -8,71 +8,75 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Grid from '@material-ui/core/Grid';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Button from '@material-ui/core/Button';
 
 
 
+class SearchBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addr: '',
+      rad: '1 mi'
+    }
+  }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  formControl: { 
-    marginLeft: 16,
-    height: '110%',
-    width: '96px'
-  },
-}));
 
-export default function SearchBar() {
-  const classes = useStyles();
+   handleChange = (event) => {
+    this.setState({rad: event.target.values })
+  }
+  updateState = (event) => {
+    this.setState({addr : event.target.value })
 
-  const [num, setRadius] = React.useState({
-    num: '1',
-  });
+  }
 
-  const handleChange = (event) => {
-    setRadius(event.target.value);
-  };
-
-  return (
-    <div className={classes.root}>
-      <Grid container className={classes.root} spacing={0} justify='left' > 
-        <Grid item xs={12} sm={8}> 
-          <TextField
-              className={classes.textField}
-              id="search-bar"
-              label="Address"
-              placeholder="Enter an address to get started!"
-              helperText=""
-              InputLabelProps={{
-                shrink: true,
-              }}
-              fullWidth
-              variant="outlined"
-            />
+  render () {
+    return (
+      <div style={{flexGrow : 1}}>
+        <Grid container style={{flexGrow : 1}} spacing={3} > 
+          <Grid item xs={12} sm={6} md={6} lg={7}> 
+            <TextField
+                id="search-bar"
+                label="Address"
+                placeholder="Enter an address to get started!"
+                helperText=""
+                onChange={this.updateState}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                fullWidth
+                variant="outlined"
+              />
+            </Grid>
+            <Grid item xs={12} sm={2} md={2} lg={2}>
+            <FormControl  fullWidth>
+              <InputLabel htmlFor="uncontrolled-native">Radius</InputLabel>
+              <NativeSelect
+                value={this.state.rad}
+                onChange={this.handleChange}
+                inputProps={{
+                  name: 'Radius',
+                  id: 'uncontrolled-native',
+                }}
+              >
+                <option value={1}>1 mi</option>
+                <option value={2}>2 mi</option>
+                <option value={3}>3 mi</option>
+                <option value={4}>4 mi</option>
+                <option value={5}>5 mi</option>
+              </NativeSelect>
+          </FormControl>
           </Grid>
-          <Grid item xs={12} sm={4}>
-          <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="radius-picker">Radius</InputLabel>
-            <NativeSelect
-              value={num}
-              onChange={handleChange}
-              defaultValue={1}
-              inputProps={{
-                name: 'Radius',
-                id: 'radius-picker',
-              }}
-            >
-              
-              <option value={1}>1 mi</option>
-              <option value={2}>2 mi</option>
-              <option value={3}>3 mi</option>
-              <option value={4}>4 mi</option>
-              <option value={5}>5 mi</option>
-            </NativeSelect>
-        </FormControl>
+          <Grid item xs={12} sm={4} md={4} lg={3}>
+            <Button  onClick={() => {this.props.handleClick(this.state.addr, this.state.rad)}} variant="contained" color="primary" size="large" fullWidth >
+              SUBMIT
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+      );
+    }
+  
 }
+  
+export default SearchBar

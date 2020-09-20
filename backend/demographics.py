@@ -4,6 +4,7 @@ from geopy.geocoders import Nominatim
 from census import Census
 import json
 import re
+import os
 
 # https://www.zipcodeapi.com/rest/<api_key>/radius.<format>/<zip_code>/<distance>/mi?minimal
 
@@ -16,27 +17,46 @@ census_codes = {
     "B02001_004E": "race_total_native",
     "B02001_005E": "race_total_asian",
     "B02001_006E": "race_total_pacific_islander",
-    # "B26106_002E" : "less_than_high_school",
-    # "B26106_003E" : "high_school_graduate",
-    # "B26106_004E" : "some_college_or_associates",
-    # "B26106_005E" : "bachelors_or_higher"
+    "B03001_003E": "race_total_hispanic",
+    "B15003_002E": "education_none",
+    "B15003_017E": "education_highschool",
+    "B15003_021E": "education_associate",
+    "B15003_022E": "education_bachelor",
+    "B15003_023E": "education_master",
+    "B15003_025E": "education_doctorate"
 }
 
 
 def main():
     pp = pprint.PrettyPrinter(indent=2)
     # zip_codes = addressToZipCodes("1036 Heather LN Hartford Wisconsin", "5")
-    zip_codes = zipCodeToZipCodes("53072", "1")
+    zip_codes = zipCodeToZipCodes("02114", "1")
     pp.pprint(aggregateAllData(zip_codes))
 
 
 # fetches all census data
 def getCensusDataDict(zipcode):
-    censusDict = {}
-    for census_code, description in census_codes.items():
-        censusDict[description] = getCensusData(zipcode, census_code)
-    return censusDict
+    path = os.path.join('censusCache', 'a' + str(zipcode))
+    if not os.path.exists(path):
+        censusDict = {}
+        for census_code, description in census_codes.items():
+            censusDict[description] = getCensusData(zipcode, census_code)
+        with open(path, 'w') as f:
+            json.dump(censusDict, f)
+        return censusDict
+    
+    with open(path, 'r') as f:
+        result = json.load(f)
+        return result
 
+    # path = os.path.join('cache', str(lat) + '-' + str(lon) + '.txt')
+    # if not os.path.exists(path):
+    #     with open(path, 'w') as f:
+    #         r = requests.get(api_url)
+    #         f.write(r.text)
+
+    # with open(path, 'r') as f:
+    #     return parse_json(json.load(f))
 
 # communicates with census API
 def getCensusData(zip_code, census_variable):
@@ -63,16 +83,26 @@ def addressToCoordinates(input_address):
 
 # return a list of zip codes given an address and a radius surrounding it
 def zipCodeToZipCodes(zip_code, radius):
-    zip_code_api_key = "vCcE49wpZQzAbQaXsSoUFF13AFX1u9qdqj3DmQ98n9RGKVdleh0Uu85BX6FnlYdp"
-    # zip_code_api_key = "Eg7UvM8pgDDE450RNlrPhbeQoP5eMUsMKSTbm6TYYyj5yYQnB9lCfQAN6PbNIN8p"
-    url = "https://www.zipcodeapi.com/rest/"+zip_code_api_key + \
-        "/radius.json/" + zip_code + "/" + radius + "/mile?minimal"
-    payload = ""
-    headers = {'content-type': 'application/json'}
-    response = requests.request("GET", url, data=payload, headers=headers)
-    response_dict = json.loads(response.text)
-    print(response_dict)
-    return response_dict['zip_codes']
+    path = os.path.join('censusCache', 'b' + str(zip_code) + '-' + str(radius))
+    if not os.path.exists(path):
+        # zip_code_api_key = "vCcE49wpZQzAbQaXsSoUFF13AFX1u9qdqj3DmQ98n9RGKVdleh0Uu85BX6FnlYdp"
+        # zip_code_api_key = "Eg7UvM8pgDDE450RNlrPhbeQoP5eMUsMKSTbm6TYYyj5yYQnB9lCfQAN6PbNIN8p"
+        zip_code_api_key = "08pr53EdfrdFXj3GPxomPnOPH8dtIf85EtdUyP2JB85jwh9xYoaMdedSkSD0xdEg"
+        url = "https://www.zipcodeapi.com/rest/"+zip_code_api_key + \
+            "/radius.json/" + zip_code + "/" + radius + "/mile?minimal"
+        payload = ""
+        headers = {'content-type': 'application/json'}
+        response = requests.request("GET", url, data=payload, headers=headers)
+        response_dict = json.loads(response.text)
+        with open(path, 'w') as f:
+            json.dump(response_dict, f)
+        print(response_dict)
+        return response_dict['zip_codes']
+
+    with open(path, 'r') as f:
+        result = json.load(f)
+        print(result)
+        return result['zip_codes']
 
 
 # return a list of zip codes given an address and a radius surrounding it
@@ -94,11 +124,11 @@ def aggregateAllData(zip_codes):
             for demographic, value in little_dict.items():
                 # compute weighted average for these fields
                 if demographic == "median_age" or demographic == "median_income":
-                    big_dict[demographic] += 0 if value is None else int(
+                    big_dict[demographic] += 0 if(value is None or int(value) < 0) else int(
                     float(value) * float(little_dict["total_population"]))
                 # sum the count of all other fields
                 else:
-                    big_dict[demographic] += 0 if value is None else int(
+                    big_dict[demographic] += 0 if (value is None or int(value) < 0) else int(
                     float(value))
 
     big_dict["median_age"] /= big_dict["total_population"]

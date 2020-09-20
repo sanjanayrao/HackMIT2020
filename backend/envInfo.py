@@ -1,11 +1,6 @@
-# r = requests.get(
-#     'https://api.breezometer.com/air-quality/v2/current-conditions?lat=48.857456&lon=2.354611&key=bf934542b3cd4f549443eb89128c6d38&features=breezometer_aqi,local_aqi,sources_and_effects,pollutants_aqi_information,health_recommendations')
-
 import json
 import os
 import requests
-# import folium
-
 
 def parse_json(json_loaded):
 
@@ -43,16 +38,3 @@ def get_air_quality(lat, lon):
 
     with open(path, 'r') as f:
         return parse_json(json.load(f))
-
-
-# parse_json(get_air_quality(48.857456, 2.354611))
-
-# def map_output(lat, lon, radius):
-#     min_lat = lat - radius
-#     max_lat = lat + radius
-#     min_lon = lat - radius
-#     max_lon = lat + radius
-# folium.folium.Map(location=[lat, lon])
-
-
-# print(json.dumps(get_air_quality(50.857456, 2.354611), indent=2, sort_keys=True))

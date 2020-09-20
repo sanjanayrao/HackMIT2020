@@ -1,0 +1,1 @@
+{"metadata": null, "data": null, "error": {"code": "bad_request", "title": "Invalid 'lat' Parameter", "detail": "The coordinates value specified under the 'lat' parameter: 118.2437 - is invalid. Make sure you've specified them according to the WGS 84 standard, with a value between -90 and +90"}}
