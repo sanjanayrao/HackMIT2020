@@ -124,11 +124,11 @@ def aggregateAllData(zip_codes):
             for demographic, value in little_dict.items():
                 # compute weighted average for these fields
                 if demographic == "median_age" or demographic == "median_income":
-                    big_dict[demographic] += 0 if(value is None or int(value) < 0) else int(
+                    big_dict[demographic] += 0 if(value is None or float(value) < 0.0) else int(
                     float(value) * float(little_dict["total_population"]))
                 # sum the count of all other fields
                 else:
-                    big_dict[demographic] += 0 if (value is None or int(value) < 0) else int(
+                    big_dict[demographic] += 0 if (value is None or float(value) < 0.0) else int(
                     float(value))
 
     big_dict["median_age"] /= big_dict["total_population"]

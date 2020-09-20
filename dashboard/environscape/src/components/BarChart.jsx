@@ -25,7 +25,7 @@ export default function BarChart(props) {
         <Bar
           data={data}
           width={100}
-          height={256}
+          height={316}
           options={{
             maintainAspectRatio: false
           }}

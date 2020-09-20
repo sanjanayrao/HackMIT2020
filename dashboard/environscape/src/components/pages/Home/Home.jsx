@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Map from '../../Map'
 import CardsList from '../../CardsList'
 import logo from '../../../assets/logo.png';
-import Cards from '../../Cards'
+import ProgressCard from '../../ProgressCard'
 import PieChart from '../../PieChart';
 import BarChart from '../../BarChart';
 
@@ -152,18 +152,21 @@ export default function Home(props) {
             <Grid item xs={12} sm={12} md={4} lg={3}>
                 <Paper style={{padding:12}} elevation={3} >
                   {/* <Typography variant="h6">Air Quality</Typography> */}
-                  { airLoaded ? <Cards title="Air Quality" aqi={airData.baqi.aqi} health={airData.health} poll={airData.baqi.dominant_pollutant} source="" body={airData.baqi.category} col={airData.baqi.color} aq={true}/> : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard title="Overall Air Quality" aqi={airData.baqi.aqi} health={airData.health} poll={airData.baqi.dominant_pollutant} source="" body={airData.baqi.category} col={airData.baqi.color} /> : <Skeleton variant="rect" height={100}/> }
                   {/* <Typography variant="h6">Carbon Monoxide</Typography> */}
-                  { airLoaded ? <Cards title="Carbon Monoxide" aqi={airData.pollutants.co.aqi} source={airData.pollutants.co.sources} effects={airData.pollutants.co.effects} col={airData.pollutants.co.color} aq={true}/>   : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard title="Carbon Monoxide" aqi={airData.pollutants.co.aqi} source={airData.pollutants.co.sources} effects={airData.pollutants.co.effects} col={airData.pollutants.co.color} />   : <Skeleton variant="rect" height={100}/> }
                   {/* <Typography variant="h6">Ozone</Typography> */}
-                  { airLoaded ? <Cards title="Ozone" aqi={airData.pollutants.o3.aqi} source={airData.pollutants.o3.sources} effects={airData.pollutants.o3.effects} col={airData.pollutants.o3.color} aq={true}/>   : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard title="Ozone" aqi={airData.pollutants.o3.aqi} source={airData.pollutants.o3.sources} effects={airData.pollutants.o3.effects} col={airData.pollutants.o3.color} />   : <Skeleton variant="rect" height={100}/> }
                   {/* <Typography variant="h6">NO2</Typography> */}
-                  { airLoaded ? <Cards  title="Nitgrogen Dioxide" aqi={airData.pollutants.no2.aqi} source={airData.pollutants.no2.sources} effects={airData.pollutants.no2.effects} col={airData.pollutants.no2.color} aq={true}/>   : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard  title="Nitgrogen Dioxide" aqi={airData.pollutants.no2.aqi} source={airData.pollutants.no2.sources} effects={airData.pollutants.no2.effects} col={airData.pollutants.no2.color} />   : <Skeleton variant="rect" height={100}/> }
                   {/* <Typography variant="h6">PM10</Typography> */}
-                  { airLoaded ? <Cards  title="PM10" aqi={airData.pollutants.pm10.aqi} source={airData.pollutants.pm10.sources} effects={airData.pollutants.pm10.effects} col={airData.pollutants.pm10.color} aq={true}/>   : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard  title="PM10" aqi={airData.pollutants.pm10.aqi} source={airData.pollutants.pm10.sources} effects={airData.pollutants.pm10.effects} col={airData.pollutants.pm10.color} />   : <Skeleton variant="rect" height={100}/> }
                   {/* <Typography variant="h6">PM2.5</Typography> */}
-                  { airLoaded ? <Cards  title="PM25" aqi={airData.pollutants.pm25.aqi} source={airData.pollutants.pm25.sources} effects={airData.pollutants.pm25.effects} col={airData.pollutants.pm25.color} aq={true}/>  : <Skeleton variant="rect" height={100}/> }
+                  { airLoaded ? <ProgressCard  title="PM25" aqi={airData.pollutants.pm25.aqi} source={airData.pollutants.pm25.sources} effects={airData.pollutants.pm25.effects} col={airData.pollutants.pm25.color} />  : <Skeleton variant="rect" height={100}/> }
               </Paper>
+            </Grid>
+            <Grid item xs={12}>
+                <p>Design and built for HackMIT 2020 Urban Innovation track by Annika Wille, Brad Hodkinson, Matt Wildman, and Sanjana Rao</p>
             </Grid>
         </Grid>
     </div>

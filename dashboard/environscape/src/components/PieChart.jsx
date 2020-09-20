@@ -10,6 +10,7 @@ export default function PieChart(props) {
       'High School',
       'Associates',
       'Bachelors',
+      'Masters',
       'Doctorates'
     ],
     datasets: [{
@@ -20,13 +21,15 @@ export default function PieChart(props) {
       '#FFCE56', 
       '#C6A2EB',
       '#A1CE56', 
+      '#f653ff',
       ],
       hoverBackgroundColor: [
       '#FF6384',
       '#36A2EB',
       '#FFCE56',
       '#C6A2EB',
-      '#A1CE56',
+      '#A1CE56', 
+      '#f653ff',
       ]
     }]
   }

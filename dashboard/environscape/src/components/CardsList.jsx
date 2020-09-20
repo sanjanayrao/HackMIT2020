@@ -12,8 +12,8 @@ export default function CardsList(props) {
     const classes = useStyles();
     return (
         <div>
-            <Cards title="Total Population" col="#5688C7" body={props.pop}></Cards>
-            <Cards title="Median Age" col="#DDA448" body={props.age}></Cards>
+            <Cards title="Total Population" col="#5688C7" body={props.pop+' people'}></Cards>
+            <Cards title="Median Age" col="#DDA448" body={props.age+' years'}></Cards>
             <Cards title="Median Income " col="#2C5784" body={'$'.concat(props.inc,'/year')}></Cards>
         </div>
     );

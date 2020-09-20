@@ -50,7 +50,10 @@ class SearchBar extends Component {
             </Grid>
             <Grid item xs={12} sm={2} md={2} lg={2}>
             <FormControl  fullWidth>
-              <InputLabel htmlFor="uncontrolled-native">Radius</InputLabel>
+              {/* <InputLabel>Radius</InputLabel> */}
+              <InputLabel shrink >
+                Radius
+              </InputLabel>
               <NativeSelect
                 value={this.state.rad}
                 onChange={this.handleChange}
