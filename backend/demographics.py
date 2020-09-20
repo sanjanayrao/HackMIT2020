@@ -30,8 +30,9 @@ census_codes = {
 def main():
     pp = pprint.PrettyPrinter(indent=2)
     # zip_codes = addressToZipCodes("1036 Heather LN Hartford Wisconsin", "5")
-    zip_codes = zipCodeToZipCodes("02114", "1")
-    pp.pprint(aggregateAllData(zip_codes))
+    # zip_codes = zipCodeToZipCodes("02114", "1")
+    # pp.pprint(aggregateAllData(zip_codes))
+    print(zipToCoordinates(53072))
 
 
 # fetches all census data
@@ -44,7 +45,7 @@ def getCensusDataDict(zipcode):
         with open(path, 'w') as f:
             json.dump(censusDict, f)
         return censusDict
-    
+
     with open(path, 'r') as f:
         result = json.load(f)
         return result
@@ -59,6 +60,8 @@ def getCensusDataDict(zipcode):
     #     return parse_json(json.load(f))
 
 # communicates with census API
+
+
 def getCensusData(zip_code, census_variable):
     census_api_key = "756543c3b2a18464d619945fafe8ef5a6db89267"
     url = "https://api.census.gov/data/2017/acs/acs5?key="+census_api_key + \
@@ -75,7 +78,7 @@ def getCensusData(zip_code, census_variable):
 
 
 # return a tuple of coordinates given an address
-def addressToCoordinates(input_address):
+def zipToCoordinates(input_address):
     geolocator = Nominatim(user_agent="sucky_triangles")
     location = geolocator.geocode(input_address, exactly_one=True)
     return (location.latitude, location.longitude)
@@ -108,14 +111,15 @@ def zipCodeToZipCodes(zip_code, radius):
 # return a list of zip codes given an address and a radius surrounding it
 def addressToZipCodes(input_address, radius):
     geolocator = Nominatim(user_agent="sucky_triangles")
-    location = geolocator.geocode(input_address, exactly_one=True, countries=["USA"])
+    location = geolocator.geocode(
+        input_address, exactly_one=True, countries=["USA"])
     zip_code_regex = re.compile(r"\s\b(\d{5})(?:-\d{4})?,")
     zip_code = zip_code_regex.findall(location.address)[0]
     return zipCodeToZipCodes(zip_code, radius)
 
 
 def aggregateAllData(zip_codes):
-    big_dict = {census_codes[censusCode]: 0 for censusCode in census_codes.keys()}
+    big_dict = {census_codes[censusCode]                : 0 for censusCode in census_codes.keys()}
     total_counter = 0
     for zip_code in zip_codes:
         little_dict = getCensusDataDict(zip_code)
@@ -125,11 +129,11 @@ def aggregateAllData(zip_codes):
                 # compute weighted average for these fields
                 if demographic == "median_age" or demographic == "median_income":
                     big_dict[demographic] += 0 if(value is None or float(value) < 0.0) else int(
-                    float(value) * float(little_dict["total_population"]))
+                        float(value) * float(little_dict["total_population"]))
                 # sum the count of all other fields
                 else:
                     big_dict[demographic] += 0 if (value is None or float(value) < 0.0) else int(
-                    float(value))
+                        float(value))
 
     big_dict["median_age"] /= big_dict["total_population"]
     big_dict["median_income"] /= big_dict["total_population"]

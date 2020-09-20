@@ -2,6 +2,7 @@ import json
 import os
 import requests
 
+
 def parse_json(json_loaded):
 
     baqi = json_loaded['data']['indexes']['baqi']

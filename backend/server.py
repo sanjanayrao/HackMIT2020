@@ -18,15 +18,17 @@ class MyHandler(BaseHTTPRequestHandler):
             self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-type", "text/json")
             self.end_headers()
-            print(params)
+            coordinates = demographics.zipToCoordinates(params['zip'])
+            print(coordinates)
             self.wfile.write(json.dumps(
-                envInfo.get_air_quality(params['lat'][0], params['lon'][0])).encode('utf-8'))
+                envInfo.get_air_quality(coordinates[0], coordinates[1])).encode('utf-8'))
         elif path == "/DemoInfo":
             self.send_response(200)
             self.send_header("Access-Control-Allow-Origin", "*")
             self.send_header("Content-type", "text/json")
             self.end_headers()
-            zip_codes = demographics.zipCodeToZipCodes(params['zip'][0], params['rad'][0])
+            zip_codes = demographics.zipCodeToZipCodes(
+                params['zip'][0], params['rad'][0])
             self.wfile.write(json.dumps(
                 demographics.aggregateAllData(zip_codes)).encode('utf-8'))
         print("Sent Response")
