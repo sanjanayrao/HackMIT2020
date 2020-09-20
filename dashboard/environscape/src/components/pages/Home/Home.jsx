@@ -117,8 +117,8 @@ export default function Home(props) {
       // TODO: get zip code from addressInput
       setZipcode(53072)
     }
-    console.log("radius: " + parseInt(radius))
-    setRadius(parseInt(radius))
+    console.log("radius: " + parseInt(radius.split(" ")[0]))
+    setRadius(parseInt(radius.split(" ")[0]))
   }
   return (
     <div className={classes.root}>

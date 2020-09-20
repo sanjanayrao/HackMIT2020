@@ -49,9 +49,9 @@ export default function ProgressCard(props) {
           {props.title}
         </Typography>
         <Typography gutterBottom variant="body2" component="p" style={{ textAlign: "right", margin: "0 3px -20px 0", zIndex: 1000, position: "relative" }}>
-          {props.aqi + '/500'}
+          {props.aqi + '/100'}
         </Typography>
-        <BorderLinearProgress classes={{ barColorPrimary: classes.statColor }} variant="determinate" value={props.aqi / 5} />
+        <BorderLinearProgress classes={{ barColorPrimary: classes.statColor }} variant="determinate" value={props.aqi} />
       </CardContent>
       <Popover
         id="mouse-over-popover"
