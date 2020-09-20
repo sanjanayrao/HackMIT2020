@@ -26,7 +26,7 @@ census_codes = {
 def main():
     pp = pprint.PrettyPrinter(indent=2)
     # zip_codes = addressToZipCodes("1036 Heather LN Hartford Wisconsin", "5")
-    zip_codes = zipCodeToZipCodes("53072", "5")
+    zip_codes = zipCodeToZipCodes("53072", "1")
     pp.pprint(aggregateAllData(zip_codes))
 
 
@@ -78,7 +78,7 @@ def zipCodeToZipCodes(zip_code, radius):
 # return a list of zip codes given an address and a radius surrounding it
 def addressToZipCodes(input_address, radius):
     geolocator = Nominatim(user_agent="sucky_triangles")
-    location = geolocator.geocode(input_address, exactly_one=True)
+    location = geolocator.geocode(input_address, exactly_one=True, countries=["USA"])
     zip_code_regex = re.compile(r"\s\b(\d{5})(?:-\d{4})?,")
     zip_code = zip_code_regex.findall(location.address)[0]
     return zipCodeToZipCodes(zip_code, radius)
