@@ -9,6 +9,6 @@
 
 Sources:
 
-[NIH Study](https://ehp.niehs.nih.gov/doi/pdf/10.1289/ehp.02110s2161#:~:text=Environmental%20injustice%20can%20be%20defined,laws%2C%20regulations%2C%20governmental%20programs%2C)
+[Census Data](https://api.census.gov/data/2017/acs/acs5/variables.html)
 
-[EPA - Learn About Environmental Injustice](https://www.epa.gov/environmentaljustice/learn-about-environmental-justice)
+[Breezometer API](https://breezometer.com/)
